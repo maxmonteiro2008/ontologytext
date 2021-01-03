@@ -1,7 +1,6 @@
-﻿import nltk as tk
-import textmining as tx
+import nltk as tk
 import networkx as nx
-#import pylab as plt
+import textmining as tx
 import re
 import matplotlib.pyplot as plt
 import os
@@ -10,11 +9,13 @@ path="./rfcs/"
 files=os.listdir(path)
 
 docs=[]
+# Initiallizing the reference graph
+G=nx.Graph()
+G.add_node(0,{"color": "red"})
+
 # Constructing the graph of rfcs references 
 try:
     for f in files:
-        n1 = f.split('.')
-        G.add_node(n1[0], color='r')
         doc=open(path+f,'r')
         text = doc.read()
         ref =re.findall(r'RFC \s\d{4}',text,re.X)
@@ -22,9 +23,9 @@ try:
         #print ref
         for r in ref:
             print r
-            G.add_node(r,color='b')
-            if r!= n1[0]:
-                 G.add_edge(n1[0], r)
+            G.add_node(r,{"color": "blue"})
+            G.add_edge(0,r)
+            
         
 
 except:
@@ -35,21 +36,14 @@ plt.show()
 plt.figure("test1.png")
 
 
-
-doc3=file3.read()
-doc4=file4.read()
-doc5=file5.read()
-
-
-
 tdm = tx.TermDocumentMatrix()
 
 
 
+for d in len(docs):
+   doc=docs[d].read()
+   tdm.add_doc (doc)
 
-tdm.add_doc (doc3)
-tdm.add_doc(doc4)
-tdm.add_doc(doc5)
 
 tdm.write_csv('matrix.csv', cutoff=1)
 

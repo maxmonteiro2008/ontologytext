@@ -1,3 +1,3 @@
-# ontologytext
-extracting ontologies from text
-this repository keeps python code for  management ontology extracting
+# text to ontology
+This software extracts  ontology from text
+network  management ontology extracting using RFCs

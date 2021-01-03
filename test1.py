@@ -8,18 +8,9 @@ import os
 
 path="./rfcs/"
 files=os.listdir(path)
-#print files
-
-#   Gerar o no centraldos documentos
-f=files[0]
-#print f
-n1 = f.split('.')
-G = nx.Graph()
-G.add_node(n1[0])
-
 
 docs=[]
-
+# Constructing the graph of rfcs references 
 try:
     for f in files:
         n1 = f.split('.')
@@ -39,48 +30,29 @@ try:
 except:
     print "IO Erro"
 
-
-
-#print docs[0]
-#doc1=file1.read()
-#doc2=file2.read()
-#ref = list()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 nx.draw(G,  with_labels = True, node_size=1000)
 plt.show()
-#plt.figure("test1.png")
+plt.figure("test1.png")
 
 
 
-#doc3=file3.read()
-#doc4=file4.read()
-#doc5=file5.read()
+doc3=file3.read()
+doc4=file4.read()
+doc5=file5.read()
 
 
 
-#tdm = tx.TermDocumentMatrix()
+tdm = tx.TermDocumentMatrix()
 
 
 
 
-#tdm.add_doc (doc1)
-#tdm.add_doc(doc2)
+tdm.add_doc (doc3)
+tdm.add_doc(doc4)
+tdm.add_doc(doc5)
 
-#tdm.write_csv('matrix.csv', cutoff=1)
+tdm.write_csv('matrix.csv', cutoff=1)
 
 
-#for row in tdm.rows(cutoff=1):
-#print row
+for row in tdm.rows(cutoff=1):
+print row
